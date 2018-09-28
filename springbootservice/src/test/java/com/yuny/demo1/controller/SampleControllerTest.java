@@ -1,7 +1,6 @@
 package com.yuny.demo1.controller;
 
 
-
 import com.tritonsfs.springboot.controller.SampleController;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,23 +22,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = MockServletContext.class)
 @WebAppConfiguration
 public class SampleControllerTest {
-	private MockMvc mock;
-	
-	@Before
-	public void setUp(){
-		mock = MockMvcBuilders.standaloneSetup(new SampleController()).build();
-	}
+    private MockMvc mock;
 
-	@Test
-	public void testHome() throws Exception {
-		mock.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk())
-			.andExpect(content().string(equalTo("Hello World!")));
-	}
+    @Before
+    public void setUp() {
+        mock = MockMvcBuilders.standaloneSetup(new SampleController()).build();
+    }
 
-	@Test
-	public void testJson() throws Exception{
-		mock.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk());
-	}
+    @Test
+    public void testHome() throws Exception {
+        mock.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("Hello World!")));
+    }
+
+    @Test
+    public void testJson() throws Exception {
+        mock.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }
