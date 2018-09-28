@@ -26,10 +26,16 @@
     </properties>
 
     <dependencies>
-        <!--Web starter依赖引入，会增加web容器、springweb、springmvc、jackson-databind等相关的依赖-->
+        <!--Web starter依赖引入，会增加web容器、springweb、springmvc、jackson-databind等相关的依赖
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        -->
+        <!-- springboot整合thymeleaf 会自动添加spring-boot-starter-web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <!--引入测试依赖 -->
         <dependency>

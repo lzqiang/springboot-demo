@@ -35,10 +35,4 @@ public class SampleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Hello World!")));
     }
-
-    @Test
-    public void testJson() throws Exception {
-        mock.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
 }
