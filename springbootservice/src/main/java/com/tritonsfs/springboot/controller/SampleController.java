@@ -1,6 +1,7 @@
 package com.tritonsfs.springboot.controller;
 
 import com.tritonsfs.springboot.service.MailSendService;
+import com.tritonsfs.springboot.service.RetryDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ public class SampleController {
 
     @Autowired
     private MailSendService mailSendService;
+    @Autowired
+    private RetryDemoService retryDemoService;
 
     @RequestMapping("/")
     @ResponseBody
@@ -36,5 +39,11 @@ public class SampleController {
         return "ok";
     }
 
+    @RequestMapping("/retryTest")
+    @ResponseBody
+    public String retryTest(){
+        retryDemoService.retry();
+        return "OK";
+    }
 
 }

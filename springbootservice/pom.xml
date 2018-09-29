@@ -67,6 +67,11 @@
             <artifactId>frame-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- spring-retry依赖-->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
