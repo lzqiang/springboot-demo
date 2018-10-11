@@ -35,4 +35,8 @@ public class SampleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Hello World!")));
     }
+
+    public void test(){
+        System.out.println("aaaaaaaa");
+    }
 }
