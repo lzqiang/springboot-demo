@@ -101,6 +101,11 @@
             <artifactId>hutool-all</artifactId>
             <version>4.1.18</version>
         </dependency>
+        <!--slf4j注解 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

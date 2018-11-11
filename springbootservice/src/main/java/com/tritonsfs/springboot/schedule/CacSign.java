@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
+import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +20,8 @@ import java.util.Map;
 @Configuration
 @EnableScheduling
 @Component
+@Slf4j
 public class CacSign {
-    private static final Logger logger = LoggerFactory.getLogger(CacSign.class);
     @Value("${cacLoginUrl}")
     private String loginUrl;
     @Value("${phone}")
@@ -37,7 +37,7 @@ public class CacSign {
         try {
             jsonObject = loginCac();
         } catch (Exception e) {
-            logger.error("登录失败,errorMsg={}", e.getMessage(), e);
+            log.error("登录失败,errorMsg={}", e.getMessage(), e);
             return;
         }
         if (null != jsonObject) {
@@ -48,10 +48,10 @@ public class CacSign {
                 try {
                     sign(userId, loginToken);
                 } catch (Exception e) {
-                    logger.error("签到失败,errorMsg={}", e.getMessage(), e);
+                    log.error("签到失败,errorMsg={}", e.getMessage(), e);
                 }
             } else {
-                logger.error("userId或loginToken为空");
+                log.error("userId或loginToken为空");
             }
         }
     }
