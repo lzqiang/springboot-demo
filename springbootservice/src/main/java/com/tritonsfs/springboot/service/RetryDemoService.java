@@ -1,8 +1,7 @@
 package com.tritonsfs.springboot.service;
 
 import com.tritonsfs.springboot.exception.RetryException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
@@ -12,9 +11,8 @@ import org.springframework.stereotype.Service;
  * @author 2018/9/29 14:41 by 刘赵强
  **/
 @Service
+@Slf4j
 public class RetryDemoService {
-    private Logger log = LoggerFactory.getLogger(RetryDemoService.class);
-
     private static int i = 1;
     //backoff：重试等待策略，默认使用@Backoff，@Backoff的value默认为1000L，我们设置为2000L；
     // multiplier（指定延迟倍数）默认为0，表示固定暂停1秒后进行重试，

@@ -2,15 +2,16 @@ package com.tritonsfs.springboot.schedule;
 
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import lombok.extern.slf4j.Slf4j;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import java.util.Map;
 @Component
 @Slf4j
 public class CacSign {
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     @Value("${cacLoginUrl}")
     private String loginUrl;
     @Value("${phone}")
@@ -31,14 +33,23 @@ public class CacSign {
     @Value("${cacSignUrl}")
     private String cacSignUrl;
 
-    @Scheduled(cron = "0 0 8 * * ? ")
+    @Scheduled(cron = "0/10 * * * * ? ")
+    public void test() {
+        log.error("当前时间={}", simpleDateFormat.format(new Date()));
+    }
+
+    @Scheduled(cron = "0 0 10 * * ? ")
     public void work() {
-        JSONObject jsonObject = null;
+        cacSign();
+    }
+
+    public JSONObject cacSign() {
+        JSONObject jsonObject;
         try {
             jsonObject = loginCac();
         } catch (Exception e) {
             log.error("登录失败,errorMsg={}", e.getMessage(), e);
-            return;
+            return null;
         }
         if (null != jsonObject) {
             JSONObject model = jsonObject.getJSONObject("model");
@@ -46,7 +57,7 @@ public class CacSign {
             String loginToken = model.getString("loginToken");
             if (StringUtils.isNotEmpty(userId) && StringUtils.isNotEmpty(loginToken)) {
                 try {
-                    sign(userId, loginToken);
+                    return sign(userId, loginToken);
                 } catch (Exception e) {
                     log.error("签到失败,errorMsg={}", e.getMessage(), e);
                 }
@@ -54,6 +65,7 @@ public class CacSign {
                 log.error("userId或loginToken为空");
             }
         }
+        return null;
     }
 
     /**
