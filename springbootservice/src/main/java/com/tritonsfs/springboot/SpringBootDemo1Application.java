@@ -10,7 +10,7 @@ import org.springframework.retry.annotation.EnableRetry;
  **/
 
 @SpringBootApplication
-@ComponentScan({"com.tritonsfs.cac.redis","com.tritonsfs.springboot"})
+@ComponentScan({"com.tritonsfs.cac.redis","com.tritonsfs.cac.mq","com.tritonsfs.springboot"})
 @EnableRetry
 public class SpringBootDemo1Application {
     public static void main(String[] args) {
